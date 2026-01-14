@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz Seru</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fce4ec;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    h1 {
+      color: #d81b60;
+    }
+
+    button {
+      background-color: #f06292;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #ec407a;
+    }
+
+    #hasil {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    #score {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🎯 Quiz Pintar</h1>
+
+<p id="pertanyaan"></p>
+
+<button onclick="jawab('a')" id="btnA"></button>
+<button onclick="jawab('b')" id="btnB"></button>
+<button onclick="jawab('c')" id="btnC"></button>
+
+<p id="hasil"></p>
+<p id="score"></p>
+
+<button onclick="ulangQuiz()" id="ulang" style="display:none;">🔁 Ulang Quiz</button>
+
+<script>
+  let soal = [
+    { tanya: "Ada berapa rukun Iman?", a: "10", b: "2", c: "6", benar: "c" },
+  { tanya: "Siapa Malaikat yang menyampaikan wahyu?", a: "mikail", b: "jibril", c: "adam", benar: "b" },
+  { tanya: "Arti dari Al-Malik?", a: "Maha Merajai", b: "Maha Esa", c: "Maha Kuat", benar: "a" },
+  { tanya: "Hewan yang termasuk Hewan Qurban?", a: "Sapi", b: "Ayam", c: "Ikan", benar: "a" },
+  { tanya: "Ketika teman kita jatuh kita harus?", a: "tidur", b: "Menolong", c: "Menangis", benar: "b" },
+  { tanya: "Al-'Aziz artinya?", a: "Maha perkasa", b: "Maha lembut", c: "Maha Agung", benar: "a" },
+  { tanya: "Puasa adalah rukun islam yang ke-?", a: "1", b: "4", c: "7", benar: "b" },
+  { tanya: "Ada berapa Rakaat Sholat dalam 5 waktu?", a: "1", b: "17", c: "9", benar: "b" },
+  { tanya: "Malaikat yang menjaga neraka?", a: "jibril", b: "raqib", c: "Malik", benar: "c" },
+  { tanya: "Setelah gerakan Rukuk adalah?", a: "I'tidal", b: "Sujud", c: "Ta'hiyat", benar: "a" },
+  { tanya: "Nabi yang pertama adalah?", a: "Muhammad", b: "Idris", c: "Adam", benar: "c" },
+  { tanya: "Setelah Kumur-kumur adalah?", a: "Basuh hidung", b: "Cuci kaki", c: "Baca do'a", benar: "a" },
+  { tanya: "Apakah hukum huruf ba ketika sukun?", a: "Qolqolah", b: "idzhar", c: "Panjang", benar: "a" },
+  { tanya: "Siapa istri pertama Rasulullah", a: "Khadijah", b: "aisyah", c: "Zainab", benar: "a" },
+  { tanya: "Rukun islam yang ke-2?", a: "Syahadat", b: "Puasa", c: "Sholat", benar: "c" }
+];
+
+  let nomor = 0;
+  let nilai = 0;
+
+  function tampilSoal() {
+    document.getElementById("pertanyaan").innerHTML = soal[nomor].tanya;
+    document.getElementById("btnA").innerHTML = soal[nomor].a;
+    document.getElementById("btnB").innerHTML = soal[nomor].b;
+    document.getElementById("btnC").innerHTML = soal[nomor].c;
+    document.getElementById("score").innerHTML = "Score: " + nilai;
+    document.getElementById("hasil").innerHTML = "";
+  }
+
+  function jawab(pilihan) {
+    if (pilihan === soal[nomor].benar) {
+      nilai++;
+      document.getElementById("hasil").innerHTML = "✅ BENAR!";
+    } else {
+      document.getElementById("hasil").innerHTML = "❌ SALAH!";
+    }
+
+    nomor++;
+
+    if (nomor < soal.length) {
+      setTimeout(tampilSoal, 1000);
+    } else {
+      document.getElementById("pertanyaan").innerHTML = "🎉 Quiz Selesai!";
+      document.getElementById("score").innerHTML = "Nilai akhir kamu: " + nilai;
+      document.getElementById("btnA").style.display = "none";
+      document.getElementById("btnB").style.display = "none";
+      document.getElementById("btnC").style.display = "none";
+      document.getElementById("ulang").style.display = "inline-block";
+    }
+  }
+
+  function ulangQuiz() {
+    nomor = 0;
+    nilai = 0;
+    document.getElementById("btnA").style.display = "inline-block";
+    document.getElementById("btnB").style.display = "inline-block";
+    document.getElementById("btnC").style.display = "inline-block";
+    document.getElementById("ulang").style.display = "none";
+    tampilSoal();
+  }
+
+  tampilSoal();
+</script>
+
+</body>
+</html>
